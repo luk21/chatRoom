@@ -1,0 +1,10 @@
+{
+  "dbURL": "mongodb://user:chat@ds159892.mlab.com:59892/chatroom",
+  "sessionSecret": "super secret",
+  "fb": {
+    "appId": "123",
+    "appSecret": "123",
+    "callbackURL": "http://localhost:3000/auth/facebook/callback"
+  },
+  "host": "http://localhost:3000"
+}

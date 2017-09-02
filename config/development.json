@@ -1,4 +1,5 @@
 {
   "dbURL": "mongodb://user:chat@ds159892.mlab.com:59892/chatroom",
-  "sessionSecret": "SLDDFSDFDSKFSFKSFKSFSJFJ"
+  "sessionSecret": "super secret",
+  "host": "http://localhost:3000"
 }

@@ -46,22 +46,16 @@ app.use(passport.session());
 app.use(flash());
 
 
-// app.set('port', process.env.PORT || 3000);
-// const server = require('http').createServer(app);
-// const io = require('socket.io').listen(server);
+app.set('port', process.env.PORT || 3000);
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 
-require('./routes/routes')(express, app, passport);
-// require('./socket/socket')(io, rooms);
-//
-//
-//
-// server.listen(app.get('port'), () => {
-//   console.log('ChatRoom on Port: ' + app.get('port'));
-// });
+require('./routes/routes')(express, app, passport, config);
+require('./socket/socket')(io, rooms);
 
 
-app.listen(3000, () => {
-  console.log("ChatRoom working");
-  console.log(env);
+
+server.listen(app.get('port'), () => {
+  console.log('ChatRoom on Port: ' + app.get('port'));
 });
 

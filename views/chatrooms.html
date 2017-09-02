@@ -10,19 +10,38 @@
 
   <link rel="stylesheet" href="../css/styles.css">
 
-  <!--<script src="/socket.io/socket.io/js"></script>-->
+  <script src="/socket.io/socket.io.js"></script>
 
-  <!--<script>-->
-    <!--$(function () {-->
-      <!--var host = '{{config.host}}';-->
-      <!--var socket = io.connect(host + '/roomlist');-->
+  <script>
+    $(function () {
+      var host = '{{config.host}}';
+      var socket = io.connect(host + '/roomlist');
 
-      <!--socket.on('connect', function () {-->
-        <!--console.log("Conncetion estabilished");-->
-      <!--})-->
+      socket.on('connect', function () {
+        console.log("Connection works");
+      });
 
-    <!--})-->
-  <!--</script>-->
+      socket.on('room_update', function (data) {
+        var dataArray = JSON.parse(data);
+        $("#rooms_list").html('');
+        for (var i = 0; i<dataArray.length; i++) {
+          var listNode = "<a href='room/" + dataArray[i].room_number + "' class='list-group-item'>"
+              + dataArray[i].room_name + "</a>";
+          $("#rooms_list").prepend(listNode);
+        }
+      });
+
+      $(document).on('click', '#create', function () {
+        var room_name = $('#new_room').val();
+        if (room_name != '') {
+          var room_number = parseInt(Math.random() * 1000);
+          socket.emit('new_room', {room_name: room_name, room_number: room_number});
+          $('#new_room').val('');
+        }
+      });
+
+    })
+  </script>
 
 </head>
 <body>
@@ -35,17 +54,15 @@
     </div>
     <div class="row">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="">
+        <input id="new_room" type="text" class="form-control" placeholder="">
         <span class="input-group-btn">
-          <a href="#" class="btn btn-success" type="button">Create Room</a>
+          <a class="btn btn-success" type="button" id="create">Create Room</a>
          </span>
       </div>
     </div>
     <div class="row" style="padding-top: 5px">
-      <div class="list-group">
+      <div id="rooms_list" class="list-group">
         <a href="#" class="list-group-item">First item</a>
-        <a href="#" class="list-group-item">Second item</a>
-        <a href="#" class="list-group-item">Third item</a>
       </div>
     </div>
   </div>

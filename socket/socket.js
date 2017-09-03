@@ -12,7 +12,13 @@ module.exports = function (io, rooms) {
       // so we have to emit the event to him
       socket.emit('room_update', JSON.stringify(rooms));
     });
-  })
+  });
 
-
+  const messages = io.of('/messages').on('connection', (socket) => {
+    console.log("connected to the chatroom");
+    socket.on('join_room', (data) => {
+      socket.user_name = data.user_name;
+      socket.join(data.room_name);
+    });
+  });
 };

@@ -50,7 +50,7 @@ app.set('port', process.env.PORT || 3000);
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 
-require('./routes/routes')(express, app, passport, config);
+require('./routes/routes')(express, app, passport, config, rooms);
 require('./socket/socket')(io, rooms);
 
 

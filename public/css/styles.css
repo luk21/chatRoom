@@ -14,8 +14,14 @@ h2 {
 }
 .wrapper {
     background-color: ghostwhite;
-    height: 350px;
+    min-height: 350px;
     padding: 8px;
+}
+.wrapper p {
+    font-size: 14px;
+    /*max-width: 430px;*/
+    word-break: break-all;
+
 }
 /*.p {*/
     /*margin-bottom: 0;*/

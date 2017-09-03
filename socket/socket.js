@@ -16,9 +16,16 @@ module.exports = function (io, rooms) {
 
   const messages = io.of('/messages').on('connection', (socket) => {
     console.log("connected to the chatroom");
+
     socket.on('join_room', (data) => {
+      console.log("joining", data);
       socket.user_name = data.user_name;
-      socket.join(data.room_name);
+      socket.join(data.room_number);
+    });
+
+    socket.on('new_message', (data) => {
+      console.log("logging", data);
+      socket.broadcast.to(data.room_number).emit('message_feed', JSON.stringify(data));
     });
   });
 };

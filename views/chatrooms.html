@@ -27,7 +27,7 @@
         for (var i = 0; i<dataArray.length; i++) {
           var listNode = "<a href='room/" + dataArray[i].room_number + "' class='list-group-item'>"
               + dataArray[i].room_name + "</a>";
-          $("#rooms_list").prepend(listNode);
+          $("#rooms_list").append(listNode);
         }
       });
 

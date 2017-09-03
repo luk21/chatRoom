@@ -58,7 +58,7 @@ module.exports = (express, app, passport, config, rooms) => {
         return room.room_name;
       }
     }
-    throw Error("No room with given id!")
+    // throw Error("No room with given id!")
   }
 
   app.use('/', router);

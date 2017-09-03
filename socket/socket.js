@@ -20,12 +20,39 @@ module.exports = function (io, rooms) {
     socket.on('join_room', (data) => {
       console.log("joining", data);
       socket.user_name = data.user_name;
-      socket.join(data.room_number);
+      socket.join(data.room_number, () => {
+        updateUserList(data.room_number, true);
+      });
     });
 
     socket.on('new_message', (data) => {
       console.log("logging", data);
       socket.broadcast.to(data.room_number).emit('message_feed', JSON.stringify(data));
     });
+
+    function updateUserList(room_number, updateAll) {
+      var getUsers = io.of('/messages').in(room_number).clients((error, clients) => {
+        if (error) throw error;
+
+        let userList = [];
+
+        for (let clientId of clients) {
+          let user = getUsers.connected[clientId]; // get socket object
+          userList.push({user_name: user.user_name});
+        }
+        // console.log("user list", userList);
+        // console.log("in update:", room_number);
+        socket.emit('update_user_list', JSON.stringify(userList));
+
+        if(updateAll){
+          socket.broadcast.to(room_number).emit('update_user_list', JSON.stringify(userList));
+        }
+
+      });
+    }
+
+    socket.on('update_user_list_client', (data) => {
+      updateUserList(data.room_number);
+    })
   });
 };

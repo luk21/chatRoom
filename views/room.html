@@ -35,6 +35,16 @@
         updateMessageField(dataParsed.user_name, dataParsed.message);
       });
 
+      messages.on('update_user_list', function (data) {
+        var dataParsed = JSON.parse(data);
+        console.log("updaing", dataParsed);
+        $('#users').html('');
+        for (var i=0;i<dataParsed.length;i++) {
+          var userNode = '<p>' + dataParsed[i].user_name + '</p>';
+          $('#users').append(userNode);
+        }
+      });
+
       $(document).on('keyup', '#msg_input', function (e) {
         var msg_value = $.trim($(this).val());
         if (e.which === 13 && msg_value != '') { // ENTER key
@@ -52,6 +62,12 @@
         var msgStr = '<p><b>' + userName +': </b>' + message + '</p>';
         $('#messages').hide().prepend(msgStr).slideDown(200);
       }
+
+//     update user list every 10 second
+      setInterval(function () {
+        messages.emit('update_user_list_client', {room_number: roomNumber});
+      }, 10000);
+
     })
   </script>
 </head>
@@ -70,8 +86,7 @@
         </div>
       </div>
       <div class="col-md-4 col-sm-2 hidden-xs pad users">
-        <div class="wrapper">
-          <p>User</p>
+        <div id="users" class="wrapper">
         </div>
       </div>
     </div>

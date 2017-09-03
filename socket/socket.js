@@ -40,8 +40,7 @@ module.exports = function (io, rooms) {
           let user = getUsers.connected[clientId]; // get socket object
           userList.push({user_name: user.user_name});
         }
-        // console.log("user list", userList);
-        // console.log("in update:", room_number);
+
         socket.emit('update_user_list', JSON.stringify(userList));
 
         if(updateAll){

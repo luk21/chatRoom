@@ -1,34 +1,26 @@
-/*.vertical-center {*/
-    /*min-height: 100%; !* Fallback for browsers do NOT support vh unit *!*/
-    /*min-height: 100vh; !* These two lines are counted as one :-)       *!*/
-
-    /*display: flex;*/
-    /*align-items: center;*/
-/*}*/
-
 .container {
     padding-top: 5em;
 }
+
 h2 {
     border-bottom: 1px solid #D6D0C1;
 }
+
 .wrapper {
     background-color: ghostwhite;
     min-height: 350px;
     padding: 8px;
 }
+
 .wrapper p {
     font-size: 14px;
-    /*max-width: 430px;*/
     word-break: break-all;
-
 }
-/*.p {*/
-    /*margin-bottom: 0;*/
-/*}*/
+
 .pad {
     padding: 0 5px 0 5px;
 }
+
 .row {
     padding-top: 5px;
     padding-bottom: 5px;

@@ -37,7 +37,6 @@
 
       messages.on('update_user_list', function (data) {
         var dataParsed = JSON.parse(data);
-        console.log("updaing", dataParsed);
         $('#users').html('');
         for (var i=0;i<dataParsed.length;i++) {
           var userNode = '<p>' + dataParsed[i].user_name + '</p>';
@@ -92,7 +91,8 @@
     </div>
     <div class="row">
       <div class="form-group">
-        <textarea id="msg_input" rows="4" class="form-control" placeholder="Type message here"></textarea>
+        <textarea style="resize: none" id="msg_input" rows="4" class="form-control" placeholder="Type message here">
+        </textarea>
       </div>
     </div>
   </div>

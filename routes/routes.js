@@ -45,8 +45,7 @@ module.exports = (express, app, passport, config, rooms) => {
     res.render('chatrooms', {title: "Chatrooms", user: req.user, config: config.host});
   });
 
-  // TODO add secure pages below
-  router.get('/room/:id',(req, res, next) => {
+  router.get('/room/:id', securePages, (req, res, next) => {
     const room_name = getRoomName(req.params.id);
     console.log(req.user);
     res.render('room', {user: req.user, room_number: req.params.id, config: config, room_name: room_name})
@@ -62,5 +61,4 @@ module.exports = (express, app, passport, config, rooms) => {
   }
 
   app.use('/', router);
-
 };

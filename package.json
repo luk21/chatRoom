@@ -5,6 +5,9 @@
   "main": "app.js",
   "author": "",
   "license": "",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
